@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EBF16242-6494-43A8-BF68-E684D5932182}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventoria.Core", "server\src\Inventoria.Core\Inventoria.Core.csproj", "{545C069A-1676-4821-BE74-4797C79FC871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventoria.Infra.Data", "server\src\Inventoria.Infra.Data\Inventoria.Infra.Data.csproj", "{B6568AAB-8B1D-4B67-93F8-BE31D4379622}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{545C069A-1676-4821-BE74-4797C79FC871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545C069A-1676-4821-BE74-4797C79FC871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545C069A-1676-4821-BE74-4797C79FC871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545C069A-1676-4821-BE74-4797C79FC871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6568AAB-8B1D-4B67-93F8-BE31D4379622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6568AAB-8B1D-4B67-93F8-BE31D4379622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6568AAB-8B1D-4B67-93F8-BE31D4379622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6568AAB-8B1D-4B67-93F8-BE31D4379622}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EBF16242-6494-43A8-BF68-E684D5932182} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{545C069A-1676-4821-BE74-4797C79FC871} = {EBF16242-6494-43A8-BF68-E684D5932182}
+		{B6568AAB-8B1D-4B67-93F8-BE31D4379622} = {EBF16242-6494-43A8-BF68-E684D5932182}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A96CEE4B-1DFE-4983-88F7-06B1CE4B94BB}
+	EndGlobalSection
+EndGlobal
