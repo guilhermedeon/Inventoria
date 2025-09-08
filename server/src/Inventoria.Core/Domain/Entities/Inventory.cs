@@ -1,4 +1,6 @@
-﻿namespace Inventoria.Core.Domain.Entities;
+﻿using Inventoria.Core.Domain.Entities.Items;
+
+namespace Inventoria.Core.Domain.Entities;
 
 public class Inventory
 {

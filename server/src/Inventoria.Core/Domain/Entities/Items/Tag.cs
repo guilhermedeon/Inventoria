@@ -1,4 +1,4 @@
-﻿namespace Inventoria.Core.Domain.Entities;
+﻿namespace Inventoria.Core.Domain.Entities.Items;
 
 public class Tag
 {
