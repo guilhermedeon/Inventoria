@@ -1,4 +1,5 @@
-﻿using Inventoria.Core.Domain.Entities.Items;
+﻿using Inventoria.Core.Domain.Entities.Inventories;
+using Inventoria.Core.Domain.Entities.Items;
 
 namespace Inventoria.Core.Domain.Entities.Transactions;
 

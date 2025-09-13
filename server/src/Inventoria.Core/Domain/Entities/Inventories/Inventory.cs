@@ -1,6 +1,7 @@
 ﻿using Inventoria.Core.Domain.Entities.Items;
+using Inventoria.Core.Domain.Entities.Users;
 
-namespace Inventoria.Core.Domain.Entities;
+namespace Inventoria.Core.Domain.Entities.Inventories;
 
 public class Inventory
 {

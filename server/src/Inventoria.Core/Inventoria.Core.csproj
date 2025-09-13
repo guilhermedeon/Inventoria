@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Abstractions\" />
     <Folder Include="Application\" />
   </ItemGroup>
 

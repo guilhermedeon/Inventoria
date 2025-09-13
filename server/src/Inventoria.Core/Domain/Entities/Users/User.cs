@@ -1,4 +1,6 @@
-﻿namespace Inventoria.Core.Domain.Entities;
+﻿using Inventoria.Core.Domain.Entities.Inventories;
+
+namespace Inventoria.Core.Domain.Entities.Users;
 
 public class User
 {
