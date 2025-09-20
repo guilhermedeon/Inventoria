@@ -1,7 +1,7 @@
 ﻿using Inventoria.Core.Domain.Abstractions;
 using System.Data;
 
-namespace Inventoria.Core.Application.Database;
+namespace Inventoria.Core.Domain.Database;
 
 public class UnitOfWork(IInventoriaDatabase database) : IUnitOfWork
 {
