@@ -4,7 +4,7 @@ namespace Inventoria.Core.Domain.Entities.Maintenances;
 
 public class MaintenanceRecord
 {
-    public required int MaintenanceId { get; set; }
+    public int MaintenanceId { get; set; }
     public required int ItemId { get; set; }
     public required DateTime DatePerformed { get; set; }
     public decimal? Cost { get; set; }

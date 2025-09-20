@@ -2,8 +2,7 @@
 
 public class InventoryTransaction
 {
-    public required int TransactionId { get; set; }
-
+    public int TransactionId { get; set; }
     public required DateTime Date { get; set; }
     public required TransactionType Type { get; set; }
     public string? Notes { get; set; }

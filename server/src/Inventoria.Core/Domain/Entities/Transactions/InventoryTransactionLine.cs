@@ -5,7 +5,7 @@ namespace Inventoria.Core.Domain.Entities.Transactions;
 
 public class InventoryTransactionLine
 {
-    public required int LineId { get; set; }
+    public int LineId { get; set; }
 
     public required int TransactionId { get; set; }
     public required int ItemId { get; set; }

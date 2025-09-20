@@ -5,7 +5,7 @@ namespace Inventoria.Core.Domain.Entities.Items;
 
 public class Item
 {
-    public required int ItemId { get; set; }
+    public int ItemId { get; set; }
     public required int InventoryId { get; set; }
     public required string Name { get; set; }
     public required int Quantity { get; set; }
