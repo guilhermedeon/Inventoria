@@ -1,4 +1,4 @@
-﻿namespace Inventoria.Core.Domain.Entities.Migrations;
+﻿namespace Inventoria.Core.Domain.Database;
 
 public class MigrationHistoric
 {

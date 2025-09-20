@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Inventoria.Core.Domain.Abstractions;
-using Inventoria.Core.Domain.Entities.Migrations;
+using Inventoria.Core.Domain.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Concurrent;

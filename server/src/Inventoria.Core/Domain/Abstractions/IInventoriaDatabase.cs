@@ -1,4 +1,4 @@
-﻿using Inventoria.Core.Domain.Entities.Migrations;
+﻿using Inventoria.Core.Domain.Database;
 using System.Data;
 
 namespace Inventoria.Core.Domain.Abstractions;
