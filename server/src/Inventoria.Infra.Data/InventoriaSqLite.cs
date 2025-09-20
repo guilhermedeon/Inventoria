@@ -90,7 +90,22 @@ public class InventoriaSqLite : IInventoriaDatabase
             command.ExecuteNonQuery();
         }
 
-        return connection.Query<MigrationHistoric>("SELECT * FROM MigrationHistory");
+        ReturnDbConnection(connection);
 
+        return [.. connection.Query<MigrationHistoric>("SELECT * FROM MigrationHistory")];
+    }
+
+    public void CloseAllConnections()
+    {
+        while (connections.TryPop(out var conn))
+        {
+            conn.Dispose();
+        }
+    }
+
+    public void Dispose()
+    {
+        CloseAllConnections();
+        GC.SuppressFinalize(this);
     }
 }
