@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace Inventoria.Core.Domain.Abstractions;
 
 public interface IUnitOfWork : IDisposable
 {
-    public void BeginTransaction();
+    public IDbTransaction BeginTransaction();
     public void Commit();
     public void Rollback();
 
