@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventoria.Infra.Data;
+namespace Inventoria.Core.Domain.Entities.Migrations;
 
 public class MigrationHistoric
 {

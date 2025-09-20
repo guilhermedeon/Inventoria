@@ -1,17 +1,25 @@
-﻿using System.Collections.Concurrent;
-using System.Data;
-using Dapper;
+﻿using Dapper;
+using Inventoria.Core.Domain.Abstractions;
+using Inventoria.Core.Domain.Entities.Migrations;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Concurrent;
+using System.Data;
 
 namespace Inventoria.Infra.Data;
 
-public class InventoriaSqLite
+public class InventoriaSqLite : IInventoriaDatabase
 {
     private readonly string connectionString = "Data Source=./inventoria.db;";
     private readonly ConcurrentStack<IDbConnection> connections = new();
 
-    public InventoriaSqLite() {}
+    public InventoriaSqLite() { }
+
+    public InventoriaSqLite(string? customConnectionString)
+    {
+        if (!string.IsNullOrWhiteSpace(customConnectionString))
+            connectionString = customConnectionString;
+    }
 
     public InventoriaSqLite(IConfiguration configuration)
     {
