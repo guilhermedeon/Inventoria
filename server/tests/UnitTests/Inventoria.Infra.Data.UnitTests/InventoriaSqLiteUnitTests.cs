@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Data;
-using Xunit.Sdk;
 
 namespace Inventoria.Infra.Data.UnitTests;
 

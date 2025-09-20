@@ -2,6 +2,7 @@
 using System.Data;
 
 namespace Inventoria.Core.Domain.Abstractions;
+
 public interface IInventoriaDatabase : IDisposable
 {
     void ApplyMigrations();
