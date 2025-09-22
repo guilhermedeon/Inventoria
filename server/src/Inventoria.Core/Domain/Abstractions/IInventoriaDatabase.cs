@@ -1,5 +1,5 @@
-﻿using Inventoria.Core.Domain.Database;
-using System.Data;
+﻿using System.Data;
+using Inventoria.Core.Domain.Database;
 
 namespace Inventoria.Core.Domain.Abstractions;
 

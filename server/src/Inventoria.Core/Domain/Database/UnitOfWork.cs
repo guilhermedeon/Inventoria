@@ -1,17 +1,13 @@
-﻿using Inventoria.Core.Domain.Abstractions;
-using System.Data;
+﻿using System.Data;
+using Inventoria.Core.Domain.Abstractions;
 
 namespace Inventoria.Core.Domain.Database;
 
 public class UnitOfWork(IInventoriaDatabase database) : IUnitOfWork
 {
-    ~UnitOfWork()
-    {
-        Dispose();
-    }
-
     public IDbConnection? Connection { get; private set; }
     public IDbTransaction? Transaction { get; private set; }
+
     public IDbTransaction BeginTransaction()
     {
         CheckConnetion();
@@ -45,12 +41,16 @@ public class UnitOfWork(IInventoriaDatabase database) : IUnitOfWork
         Dispose();
     }
 
+    ~UnitOfWork()
+    {
+        Dispose();
+    }
+
     private void CheckConnetion()
     {
         Connection ??= database.GetDbConnection();
 
         if (Connection.State != ConnectionState.Open)
             Connection.Open();
-
     }
 }

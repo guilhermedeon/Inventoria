@@ -1,5 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-using System.Data;
+﻿using System.Data;
+using Microsoft.Data.Sqlite;
 
 namespace Inventoria.Infra.Data.UnitTests;
 

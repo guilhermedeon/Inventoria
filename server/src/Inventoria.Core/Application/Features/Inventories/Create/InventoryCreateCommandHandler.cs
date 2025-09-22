@@ -19,4 +19,3 @@ public class InventoryCreateCommandHandler(IInventoryRepository inventoryReposit
         await inventoryRepository.AddAsync(inventory);
     }
 }
-

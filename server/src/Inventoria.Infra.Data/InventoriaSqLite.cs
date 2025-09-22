@@ -1,19 +1,21 @@
-﻿using Dapper;
+﻿using System.Collections.Concurrent;
+using System.Data;
+using Dapper;
 using Inventoria.Core.Domain.Abstractions;
 using Inventoria.Core.Domain.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Concurrent;
-using System.Data;
 
 namespace Inventoria.Infra.Data;
 
 public class InventoriaSqLite : IInventoriaDatabase
 {
-    private readonly string connectionString = "Data Source=./inventoria.db;";
     private readonly ConcurrentStack<IDbConnection> connections = new();
+    private readonly string connectionString = "Data Source=./inventoria.db;";
 
-    public InventoriaSqLite() { }
+    public InventoriaSqLite()
+    {
+    }
 
     public InventoriaSqLite(string? customConnectionString)
     {
@@ -39,12 +41,10 @@ public class InventoriaSqLite : IInventoriaDatabase
                 connection.Open();
             return connection;
         }
-        else
-        {
-            var conn = CreateDbConnection();
-            conn.Open();
-            return conn;
-        }
+
+        var conn = CreateDbConnection();
+        conn.Open();
+        return conn;
     }
 
     public void ReturnDbConnection(IDbConnection connection)
@@ -73,7 +73,8 @@ public class InventoriaSqLite : IInventoriaDatabase
             command.CommandText = script;
             command.ExecuteNonQuery();
 
-            connection.Execute("INSERT INTO MigrationHistory (Name, AppliedOn) VALUES (@Name, @AppliedOn)", new { Name = Path.GetFileName(file), AppliedOn = DateTime.UtcNow.ToString() });
+            connection.Execute("INSERT INTO MigrationHistory (Name, AppliedOn) VALUES (@Name, @AppliedOn)",
+                new { Name = Path.GetFileName(file), AppliedOn = DateTime.UtcNow.ToString() });
         }
 
         ReturnDbConnection(connection);
@@ -85,7 +86,8 @@ public class InventoriaSqLite : IInventoriaDatabase
 
         using (var command = connection.CreateCommand())
         {
-            command.CommandText = "CREATE TABLE IF NOT EXISTS MigrationHistory ( Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, AppliedOn TEXT)";
+            command.CommandText =
+                "CREATE TABLE IF NOT EXISTS MigrationHistory ( Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, AppliedOn TEXT)";
 
             command.ExecuteNonQuery();
         }
@@ -97,10 +99,7 @@ public class InventoriaSqLite : IInventoriaDatabase
 
     public void CloseAllConnections()
     {
-        while (connections.TryPop(out var conn))
-        {
-            conn.Dispose();
-        }
+        while (connections.TryPop(out var conn)) conn.Dispose();
     }
 
     public void Dispose()
