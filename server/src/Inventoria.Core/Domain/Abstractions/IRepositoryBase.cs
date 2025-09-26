@@ -9,5 +9,5 @@ public interface IRepositoryBase<T>
     Task<bool> ExistsAsync(int id);
     Task AddAsync(T entity, UnitOfWork? unitOfWork = null);
     Task UpdateAsync(T entity, UnitOfWork? unitOfWork = null);
-    Task DeleteAsync(T entity, UnitOfWork? unitOfWork = null);
+    Task DeleteByIdAsync(int id, UnitOfWork? unitOfWork = null);
 }

@@ -4,7 +4,8 @@ using Inventoria.Core.Domain.Entities.Inventories.Abstractions;
 
 namespace Inventoria.Core.Application.Features.Inventories.Create;
 
-public class InventoryCreateCommandHandler(IInventoryRepository inventoryRepository) : IHandler<InventoryCreateCommand>
+public class InventoryCreateCommandHandler(IInventoryRepository inventoryRepository)
+    : IHandler<InventoryCreateCommand>
 {
     public async Task HandleAsync(InventoryCreateCommand command)
     {
