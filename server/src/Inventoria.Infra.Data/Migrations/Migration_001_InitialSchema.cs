@@ -40,16 +40,16 @@ public class Migration_001_InitialSchema : Migration
             .WithColumn("TagId").AsInt32().PrimaryKey().Identity()
             .WithColumn("Name").AsString().NotNullable();
 
-        // ItemTag (many-to-many)
-        Create.Table("ItemTag")
-            .WithColumn("ItemId").AsInt32().NotNullable()
-                .ForeignKey("Item", "ItemId").OnDelete(System.Data.Rule.Cascade)
-            .WithColumn("TagId").AsInt32().NotNullable()
-                .ForeignKey("Tag", "TagId").OnDelete(System.Data.Rule.Cascade);
-
-        Create.PrimaryKey("PK_ItemTag")
-            .OnTable("ItemTag")
-            .Columns("ItemId", "TagId");
+        // ItemTag (many-to-many) - Use raw SQL for composite PK
+        Execute.Sql(@"
+            CREATE TABLE ItemTag (
+                ItemId INTEGER NOT NULL,
+                TagId INTEGER NOT NULL,
+                PRIMARY KEY (ItemId, TagId),
+                FOREIGN KEY (ItemId) REFERENCES Item(ItemId) ON DELETE CASCADE,
+                FOREIGN KEY (TagId) REFERENCES Tag(TagId) ON DELETE CASCADE
+            );
+        ");
 
         // MaintenanceSettings table
         Create.Table("MaintenanceSettings")
