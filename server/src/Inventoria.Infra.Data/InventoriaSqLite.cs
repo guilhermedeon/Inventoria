@@ -1,10 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
+using System.Reflection;
 using Dapper;
+using FluentMigrator.Runner;
 using Inventoria.Core.Domain.Abstractions;
 using Inventoria.Core.Domain.Database;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Inventoria.Infra.Data;
 
@@ -57,44 +60,30 @@ public class InventoriaSqLite : IInventoriaDatabase
 
     public void ApplyMigrations()
     {
-        var filesInFolder = Directory.GetFiles("Migrations", "*.sql").Order();
+        var serviceProvider = new ServiceCollection()
+            .AddFluentMigratorCore()
+            .ConfigureRunner(rb => rb
+                .AddSQLite()
+                .WithGlobalConnectionString(connectionString)
+                .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations())
+            .AddLogging(lb => lb.AddFluentMigratorConsole())
+            .BuildServiceProvider(false);
 
-        var migrationHistory = CheckHistory();
-
-        var connection = GetDbConnection();
-
-        foreach (var file in filesInFolder)
-        {
-            if (migrationHistory.Any(m => m.Name == Path.GetFileName(file)))
-                continue;
-
-            var script = File.ReadAllText(file);
-            using var command = connection.CreateCommand();
-            command.CommandText = script;
-            command.ExecuteNonQuery();
-
-            connection.Execute("INSERT INTO MigrationHistory (Name, AppliedOn) VALUES (@Name, @AppliedOn)",
-                new { Name = Path.GetFileName(file), AppliedOn = DateTime.UtcNow.ToString() });
-        }
-
-        ReturnDbConnection(connection);
+        using var scope = serviceProvider.CreateScope();
+        var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+        runner.MigrateUp();
     }
 
     public IEnumerable<MigrationHistoric> CheckHistory()
     {
         var connection = GetDbConnection();
-
-        using (var command = connection.CreateCommand())
-        {
-            command.CommandText =
-                "CREATE TABLE IF NOT EXISTS MigrationHistory ( Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, AppliedOn TEXT)";
-
-            command.ExecuteNonQuery();
-        }
-
+        
+        var history = connection.Query<MigrationHistoric>(
+            "SELECT Version as Id, AppliedOn, Description as Name FROM VersionInfo ORDER BY Version");
+        
         ReturnDbConnection(connection);
-
-        return [.. connection.Query<MigrationHistoric>("SELECT * FROM MigrationHistory")];
+        
+        return history.ToList();
     }
 
     public void CloseAllConnections()
