@@ -1,13 +1,14 @@
 ﻿using Inventoria.Core.Domain.Abstractions;
 using Inventoria.Core.Domain.Entities.Inventories;
 using Inventoria.Core.Domain.Entities.Inventories.Abstractions;
+using Inventoria.SharedKernel;
 
 namespace Inventoria.Core.Application.Features.Inventories.Update;
 
 public class InventoryUpdateCommandHandler(IInventoryRepository inventoryRepository)
-    : IHandler<InventoryUpdateCommand>
+    : IHandler<InventoryUpdateCommand, Result>
 {
-    public async Task HandleAsync(InventoryUpdateCommand request)
+    public async Task<Result> HandleAsync(InventoryUpdateCommand request)
     {
         var inventory = new Inventory
         {
@@ -17,7 +18,7 @@ public class InventoryUpdateCommandHandler(IInventoryRepository inventoryReposit
             CreatedAt = request.CreatedAt,
             Description = request.Description
         };
-        
-        await inventoryRepository.UpdateAsync(inventory);
+
+        return await inventoryRepository.UpdateAsync(inventory);
     }
 }

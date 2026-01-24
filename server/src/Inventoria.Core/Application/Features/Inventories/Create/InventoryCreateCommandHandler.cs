@@ -1,13 +1,14 @@
 ﻿using Inventoria.Core.Domain.Abstractions;
 using Inventoria.Core.Domain.Entities.Inventories;
 using Inventoria.Core.Domain.Entities.Inventories.Abstractions;
+using Inventoria.SharedKernel;
 
 namespace Inventoria.Core.Application.Features.Inventories.Create;
 
 public class InventoryCreateCommandHandler(IInventoryRepository inventoryRepository)
-    : IHandler<InventoryCreateCommand>
+    : IHandler<InventoryCreateCommand, Result>
 {
-    public async Task HandleAsync(InventoryCreateCommand command)
+    public async Task<Result> HandleAsync(InventoryCreateCommand command)
     {
         var inventory = new Inventory
         {
@@ -17,6 +18,6 @@ public class InventoryCreateCommandHandler(IInventoryRepository inventoryReposit
             Description = command.Description
         };
 
-        await inventoryRepository.AddAsync(inventory);
+        return await inventoryRepository.AddAsync(inventory);
     }
 }

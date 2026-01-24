@@ -1,13 +1,14 @@
 ﻿using Inventoria.Core.Domain.Database;
+using Inventoria.SharedKernel;
 
 namespace Inventoria.Core.Domain.Abstractions;
 
 public interface IRepositoryBase<T>
 {
-    Task<T?> GetByIdAsync(int id);
-    Task<IEnumerable<T>> GetAllAsync();
-    Task<bool> ExistsAsync(int id);
-    Task AddAsync(T entity, UnitOfWork? unitOfWork = null);
-    Task UpdateAsync(T entity, UnitOfWork? unitOfWork = null);
-    Task DeleteByIdAsync(int id, UnitOfWork? unitOfWork = null);
+    Task<Result<T?>> GetByIdAsync(int id);
+    Task<Result<IEnumerable<T>>> GetAllAsync();
+    Task<Result<bool>> ExistsAsync(int id);
+    Task<Result> AddAsync(T entity, UnitOfWork? unitOfWork = null);
+    Task<Result> UpdateAsync(T entity, UnitOfWork? unitOfWork = null);
+    Task<Result> DeleteByIdAsync(int id, UnitOfWork? unitOfWork = null);
 }
